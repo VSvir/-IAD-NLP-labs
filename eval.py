@@ -161,10 +161,10 @@ def main():
         COMPRESSED_PARAMS = sum(p.numel() for p in model.parameters()) / 1e9
         comp_acc, detailed_df = evaluate_mmlu_detailed(model, tokenizer, args.fraction)
         
-        final_df = pd.read_csv(args.csv_path)
+        final_df = pd.read_csv(args.csv_path, sep=';')
         final_df['compressed_acc'] = detailed_df['accuracy']
-        b_acc = final_df["baseline_acc"].mean()
-        final_df.to_csv(args.csv_path)
+        b_acc = (final_df['baseline_acc'] * final_df['count']).sum() / total_q
+        final_df.to_csv(args.csv_path, sep=';')
 
     # MODE 3: Run both models (baseline + quantized)
     elif args.mode == "run_both":
@@ -187,7 +187,7 @@ def main():
         
         final_df = b_df.rename(columns={"accuracy": "baseline_acc"})
         final_df["compressed_acc"] = c_df["accuracy"]
-        final_df.to_csv(args.csv_path)
+        final_df.to_csv(args.csv_path, sep=';')
 
     ratio = DEFAULT_ORIG_SIZE_MB / get_size_mb(args.model_path)
     drop = max(0, (b_acc - comp_acc) / b_acc)
