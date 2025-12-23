@@ -163,7 +163,7 @@ def main():
         
         final_df = pd.read_csv(args.csv_path, sep=';')
         final_df['compressed_acc'] = detailed_df['accuracy']
-        b_acc = (final_df['baseline_acc'] * final_df['count']).sum() / total_q
+        b_acc = (final_df['baseline_acc'] * final_df['count']).sum() / final_df['count'].sum()
         final_df.to_csv(args.csv_path, sep=';')
 
     # MODE 3: Run both models (baseline + quantized)
