@@ -1,0 +1,6 @@
+{
+  "mode": "run_quantized",
+  "model_path": "Neuro-Poplar/qwen3-8b-hqq-4bit",
+  "fraction": 0.2,
+  "plot": true
+}
