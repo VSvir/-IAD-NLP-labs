@@ -121,7 +121,7 @@ def plot_mmlu_comparison(df_comp):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, default='config.json', help="Path to config.json")
-    parser.add_argument("--mode", type=str, choices=["csv_only", "run_quantized", "run_both"], default="csv_only")
+    parser.add_argument("--mode", type=str, choices=["csv_only", "run_quantized", "run_both"], default="run_quantized")
     parser.add_argument("--model_path", type=str, default="Neuro-Poplar/qwen3-8b-hqq-4bit")
     parser.add_argument("--csv_path", type=str, default="results_comparison.csv")
     parser.add_argument("--fraction", type=float, default=0.2)
